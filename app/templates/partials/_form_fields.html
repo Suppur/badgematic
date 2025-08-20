@@ -1,0 +1,22 @@
+<div class="grid md:grid-cols-2 gap-4">
+  <label class="form-control">
+    <span class="label-text">Nom complet</span>
+    <input name="name" value="{{ formdata.name|default('') }}" class="input input-bordered" required />
+  </label>
+  <label class="form-control">
+    <span class="label-text">Matricule</span>
+    <input name="employee_number" value="{{ formdata.employee_number|default('') }}" class="input input-bordered" required />
+  </label>
+  <label class="form-control">
+    <span class="label-text">Titre</span>
+    <input name="title" value="{{ formdata.title|default('') }}" class="input input-bordered" required />
+  </label>
+  <label class="form-control">
+    <span class="label-text">Téléphone</span>
+    <input name="phone" value="{{ formdata.phone|default('') }}" class="input input-bordered" required />
+  </label>
+  <label class="form-control md:col-span-2">
+    <span class="label-text">Courriel</span>
+    <input type="email" name="email" value="{{ formdata.email|default('') }}" class="input input-bordered" required />
+  </label>
+</div>

@@ -1,0 +1,24 @@
+{# Shows a live badge mock using session data #}
+<div class="card bg-base-200 shadow-xl">
+  <div class="card-body">
+    <div class="flex gap-6">
+      <div class="w-64 h-40 rounded-lg relative overflow-hidden bg-base-100 border">
+        {# Simulated badge layout #}
+        <div class="absolute inset-0 p-2">
+          <div class="text-sm font-semibold text-primary">{{ formdata.name }}</div>
+          <div class="text-xs opacity-70">{{ formdata.title }}</div>
+          <div class="text-xs opacity-70">#{{ formdata.employee_number }}</div>
+        </div>
+        {% if photo_data %}
+          <img src="{{ photo_data }}" class="absolute right-2 bottom-2 w-16 h-20 object-cover rounded" alt="photo" />
+        {% endif %}
+      </div>
+      <div class="space-x-2 self-end">
+        <form hx-post="/review/retake_photo" hx-swap="none" class="inline">
+          <button class="btn">Reprendre la photo</button>
+        </form>
+        <button class="btn btn-primary" hx-post="/print" hx-swap="none">Imprimer</button>
+      </div>
+    </div>
+  </div>
+</div>

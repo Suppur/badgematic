@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="fr" data-theme="brand-light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}Badgematic{% endblock %}</title>
+
+  <!-- Tailwind/DaisyUI output -->
+  <link href="{{ url_for('static', path='/css/output.css') }}" rel="stylesheet" />
+
+  <!-- Keep HTMX/Alpine from CDN for now (easy) -->
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  {% block head %}{% endblock %}
+</head>
+<body class="bg-base-100 text-base-content min-h-screen flex flex-col">
+  {% block content %}{% endblock %}
+  {% block scripts %}{% endblock %}
+</body>
+</html>

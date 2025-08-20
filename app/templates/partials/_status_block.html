@@ -1,0 +1,44 @@
+{# app/templates/partials/_status_block.html #}
+<div id="status"
+     hx-get="/status"
+     hx-trigger="load, every 700ms"
+     hx-swap="outerHTML">
+
+  {% if job.status == "processing" %}
+    <progress class="progress w-full mb-3"></progress>
+    {% if job.step == "queued" %}
+      <p>Mise en file d’attente…</p>
+    {% elif job.step == "image_processing" %}
+      <p>Traitement de l’image…</p>
+    {% elif job.step == "composing_badge" %}
+      <p>Application du gabarit et génération du badge…</p>
+    {% elif job.step == "printing" %}
+      <p>Envoi à l’imprimante…</p>
+    {% else %}
+      <p>Traitement en cours…</p>
+    {% endif %}
+  {% elif job.status == "success" %}
+    <div class="alert alert-success mb-3">
+      <span>Badge imprimé avec succès.</span>
+    </div>
+    <div class="flex gap-2 justify-end">
+      <form method="post" action="/reset" class="inline">
+        <button class="btn">Nouveau processus</button>
+      </form>
+      <a href="/review" class="btn">Réimprimer / Modifier</a>
+    </div>
+  {% elif job.status == "error" %}
+    <div class="alert alert-error mb-3">
+      <span>Une erreur est survenue : {{ job.error }}</span>
+    </div>
+    <div class="flex gap-2 justify-end">
+      <a href="/review" class="btn">Réessayer</a>
+      <form method="post" action="/reset" class="inline">
+        <button class="btn btn-primary">Recommencer</button>
+      </form>
+    </div>
+  {% else %}
+    <p>En attente…</p>
+  {% endif %}
+
+</div>

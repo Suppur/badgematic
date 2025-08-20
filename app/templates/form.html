@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Formulaire – Badgematic{% endblock %}
+{% block content %}
+  {% set step = 2 %}{% include "partials/_progress_steps.html" %}
+  <div class="card bg-base-200 shadow mt-6">
+    <div class="card-body">
+      <h2 class="card-title">Informations de l’employé</h2>
+      <form method="post" action="/form" class="space-y-6">
+        {% include "partials/_form_fields.html" %}
+        <div class="flex justify-end gap-2">
+          <a href="/" class="btn">Annuler</a>
+          <button class="btn btn-primary" type="submit">Suivant</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

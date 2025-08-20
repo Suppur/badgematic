@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Impression – Badgematic{% endblock %}
+{% block content %}
+
+  {% set step = 5 %}{% include "partials/_progress_steps.html" %}
+
+  <div class="card bg-base-200 shadow mt-6">
+    <div class="card-body">
+      <h2 class="card-title">Statut d’impression</h2>
+
+      {# This div is replaced by /status every ~700ms via HTMX #}
+      {% include "partials/_status_block.html" %}
+
+      <div class="divider"></div>
+      <form method="post" action="/feedback" class="flex items-end gap-3">
+        <label class="form-control">
+          <span class="label-text">Évaluation</span>
+          <select name="rating" class="select select-bordered">
+            <option>5</option><option>4</option><option>3</option><option>2</option><option>1</option>
+          </select>
+        </label>
+        <label class="form-control grow">
+          <span class="label-text">Commentaires</span>
+          <input name="comments" class="input input-bordered" placeholder="Votre expérience" />
+        </label>
+        <button class="btn btn-primary">Envoyer</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

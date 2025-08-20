@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Aperçu – Badgematic{% endblock %}
+{% block content %}
+  {% set step = 4 %}{% include "partials/_progress_steps.html" %}
+
+  <div class="grid md:grid-cols-2 gap-6 mt-6">
+    <div class="card bg-base-200">
+      <div class="card-body">
+        <h3 class="card-title">Modifier les informations</h3>
+        <form method="post" action="/review/edit" class="space-y-4">
+          {% include "partials/_form_fields.html" %}
+          <div class="flex justify-end">
+            <button class="btn">Mettre à jour</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    {% include "partials/_card_preview.html" %}
+  </div>
+{% endblock %}
