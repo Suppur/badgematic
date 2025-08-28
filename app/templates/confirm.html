@@ -8,14 +8,14 @@
     <div class="card-body">
       <h2 class="card-title">Statut d’impression</h2>
 
-      {# This div is replaced by /status every ~700ms via HTMX #}
       <div id="status"
-        hx-get="/status"
-        hx-trigger="load, every 700ms"
-        hx-swap="outerHTML">
-        {# initial render uses server-provided 'job' #}
-        {% include "partials/_status_block.html" with context %}
+           hx-get="/status"
+           hx-trigger="load, every 700ms"
+           hx-swap="outerHTML">
+        {# initial render uses server-side 'job' to avoid UndefinedError #}
+        {% include "partials/_status_block.html" %}
       </div>
+
       <div class="divider"></div>
       <form method="post" action="/feedback" class="flex items-end gap-3">
         <label class="form-control">

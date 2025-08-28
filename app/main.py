@@ -274,7 +274,6 @@ async def print_card(request: Request, background: BackgroundTasks):
 
 @app.get("/confirm", response_class=HTMLResponse)
 async def confirm_get(request: Request):
-    # The page hosts the HTMX polling block that hits /status
     session = get_session_data(request)
     job_id = session.get("job_id")
     job = PRINT_JOBS.get(job_id or "", {"status": "processing", "step": "queued"})
