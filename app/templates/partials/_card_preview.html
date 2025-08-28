@@ -1,23 +1,41 @@
-{# Shows a live badge mock using session data #}
+{# app/templates/partials/_card_preview.html #}
 <div class="card bg-base-200 shadow-xl">
   <div class="card-body">
-    <div class="flex gap-6">
+    <h3 class="card-title">Aperçu du badge</h3>
+
+    <div class="flex gap-6 items-start">
+      <!-- Badge mock -->
       <div class="w-64 h-40 rounded-lg relative overflow-hidden bg-base-100 border">
-        {# Simulated badge layout #}
         <div class="absolute inset-0 p-2">
-          <div class="text-sm font-semibold text-primary">{{ formdata.name }}</div>
+          <div class="text-sm font-semibold text-primary">
+            {{ formdata.name }}
+          </div>
           <div class="text-xs opacity-70">{{ formdata.title }}</div>
           <div class="text-xs opacity-70">#{{ formdata.employee_number }}</div>
         </div>
-        {% if photo_data %}
-          <img src="{{ photo_data }}" class="absolute right-2 bottom-2 w-16 h-20 object-cover rounded" alt="photo" />
+
+        {% if photo_path %}
+          <img src="{{ photo_path }}"
+               class="absolute right-2 bottom-2 w-16 h-20 object-cover rounded"
+               alt="photo" />
+        {% else %}
+          <div class="absolute right-2 bottom-2 w-16 h-20 rounded bg-base-300 grid place-items-center text-xs">
+            Pas de photo
+          </div>
         {% endif %}
       </div>
-      <div class="space-x-2 self-end">
-        <form hx-post="/review/retake_photo" hx-swap="none" class="inline">
-          <button class="btn">Reprendre la photo</button>
+
+      <!-- Action buttons -->
+      <div class="ms-auto flex gap-2">
+        <!-- Normal POST form: /review/retake_photo will 303 redirect to /photo -->
+        <form method="post" action="/review/retake_photo" class="inline">
+          <button type="submit" class="btn">Reprendre la photo</button>
         </form>
-        <button class="btn btn-primary" hx-post="/print" hx-swap="none">Imprimer</button>
+
+        <!-- Normal POST form: /print will 303 redirect to /confirm -->
+        <form method="post" action="/print" class="inline">
+          <button type="submit" class="btn btn-primary">Imprimer</button>
+        </form>
       </div>
     </div>
   </div>
